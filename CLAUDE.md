@@ -15,7 +15,7 @@ bash scripts/verify.sh      # Checks files are installed correctly into ~/.herme
 bash docker/test.sh         # Smoke tests — validates structure WITHOUT a live Hermes session; this is the closest thing to a unit test suite
 ```
 
-`docker/test.sh` is the validation gate to run after editing skills, agents, or workflows. It verifies every expected file exists in `~/.hermes/` **and enforces the skill-description convention** (see below). Build/run a full container with `docker-compose up` or via `Dockerfile` (only needed to test the install flow end-to-end).
+`docker/test.sh` is the validation gate to run after editing skills, agents, or workflows. It checks the files in its explicit lists exist under `~/.hermes/` and checks that each skill description contains `Use when` (see below). Build/run a full container with `docker-compose up` or via `Dockerfile` (only needed to test the install flow end-to-end).
 
 The install/distribution scripts (do not run these against this repo's own directory — `bootstrap.sh` guards against it):
 
