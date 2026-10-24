@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Oh My Hermes is an opinionated extension layer for [Hermes Agent](https://hermes-agent.nousresearch.com) — like Oh My Zsh is to Zsh. **It is not a runtime, server, or application.** It is a curated collection of markdown files (skills, agent role definitions, workflows), starter templates, and shell scripts. The repository ships files; Hermes runs them.
 
-There is **no build step, no test framework, no package manifest, no application code** here (the only `.ts`/`.js` files are health-endpoint templates that get copied into *other* projects). Treat this as a documentation-and-file-distribution project.
+There is **no root application build or package manifest**. The pack distributes documentation, shell scripts, templates and example applications. The examples and health-endpoint templates are reference material for target projects, rather than the pack's own runtime.
 
 ## Commands
 
@@ -47,7 +47,7 @@ Default stack is opinionated but pluggable: **Vercel** (deploy), **Supabase** (P
 
 **Skill file format** — every file in `skills/` must follow the agentskills.io standard with frontmatter (`name`, `description`, `version`, `tags`) and these sections: `## Overview` / `## When to Use` / `## Prerequisites` / `## Procedure` / `## Pitfalls` / `## Verification`.
 
-**Skill `description` is load-bearing and machine-checked** — it MUST start with `Use when...` and describe *only triggering conditions*, never a workflow summary. `docker/test.sh` fails the build if any skill description doesn't start with "Use when". This field is how Hermes decides whether to load the skill.
+**Skill `description` is load-bearing** — write it with `Use when...` followed by triggering conditions. The current `docker/test.sh` smoke test only checks whether the description line contains `Use when`, so it does not enforce that the phrase starts the value. This field is how Hermes decides whether to load the skill.
 
 **Content quality rules** (from `AGENTS.md`):
 - Procedures must be specific and testable, not aspirational.
